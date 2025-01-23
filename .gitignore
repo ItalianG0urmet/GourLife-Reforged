@@ -1,0 +1,13 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directory di build di Gradle
+/build/
+.gradle/
+.idea/
+.kotlin/
+/gradle/
+/run/
+out/
+

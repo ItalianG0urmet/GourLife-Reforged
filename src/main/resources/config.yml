@@ -1,0 +1,36 @@
+# Settings
+Join-messages: true
+leave-messages: true
+death-message: true
+final-message: true
+life-number: 3
+execute-command: true
+console-command: "/ban %player%" #Test
+
+# Messages
+prefix: "<gray>[<white>ServerName<gray>]<dark_gray> » "
+no-player: "<red>Player not found"
+reset-life: "<yellow>%player% is back in the game"
+no-permission: "<red>You don't have the required permissions"
+check-life: "<red>%player% has %life% lives"
+your-life: "<aqua>You have %life% lives"
+give-life: "<aqua>You have donated 1 life"
+receive-life: "<aqua>You have received 1 life from %player%"
+cant-find-player: "<red>Player not found"
+cant-send-to-yourself: "<red>You can't do that to yourself"
+revelation_message: "%player% is at (%position_x%, %position_y%, %position_z%, %world%)"
+title_revelation: "<red>Revelation"
+subtitle_revelation: "<red>"
+death: "<yellow>%player% has died and now has <red>❤ %lifes% lives"
+final-death: "<yellow>%player% has died permanently"
+join: "<yellow>%player% has joined the server!"
+leave: "<red>%player% has left the server"
+gained-life: "<aqua>You have gained 1 life"
+set-life: "<aqua>New life count: %life%"
+
+# Help
+help-commands: |
+  <red>
+  Usage:
+   <gray>give: <white>/life give <player>
+   <gray>check: <white>/life check <player>
