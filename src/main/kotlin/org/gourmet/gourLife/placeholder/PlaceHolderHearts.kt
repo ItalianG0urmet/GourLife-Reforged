@@ -24,7 +24,7 @@ class PlaceHolderHearts : PlaceholderExpansion() {
 
         if (params.equals("life", ignoreCase = true)) {
             val viteString = "" + GourLife.jsonDataLoader.getPlayerLives(player as Player)
-            return "&c❤ $viteString".toMini().toString()
+            return "&c❤ $viteString".replace("&", "§")
         }
 
         return "null"
