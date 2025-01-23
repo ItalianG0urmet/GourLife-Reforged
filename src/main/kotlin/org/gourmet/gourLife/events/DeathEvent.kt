@@ -44,7 +44,7 @@ class DeathEvent : Listener {
 
     }
 
-    private fun playerEliminated(player: Player){
+    private fun playerEliminated(player: Player) {
         var message = config.getString("final-death")
         message = message!!.replace("%player%", player.name)
         if (config.getBoolean("final-message")) {
@@ -53,13 +53,21 @@ class DeathEvent : Listener {
 
         player.gameMode = GameMode.SPECTATOR
 
-        if(config.getBoolean("execute-command")){
-          var consoleCommand = config.getString("console-command")
-          consoleCommand = consoleCommand!!.replace("%player%", player.name)
-          Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), consoleCommand)
+        if (config.getBoolean("execute-command")) {
+            var consoleCommand = config.getString("console-command")
+            consoleCommand = consoleCommand!!.replace("%player%", player.name)
+
+            GourLife.instance.logger.info("Esecuzione comando console: $consoleCommand")
+
+            try {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), consoleCommand)
+            } catch (e: Exception) {
+                GourLife.instance.logger.warning("Errore nell'esecuzione del comando: $consoleCommand")
+                e.printStackTrace()
+            }
         }
+
         jsonDataLoader.setPlayerLives(player, 0)
         jsonDataLoader.savePlayerData()
-
     }
 }

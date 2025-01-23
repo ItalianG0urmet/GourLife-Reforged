@@ -46,7 +46,7 @@ class GourLife : JavaPlugin() {
     private fun placeHolderInit() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             for (p in Bukkit.getOnlinePlayers()) {
-               if (p.hasPermission("glife.error")) {
+               if (p.hasPermission("glife.admi")) {
                     p.sendMessage("PlaceHolderApi required")
                 }
             }

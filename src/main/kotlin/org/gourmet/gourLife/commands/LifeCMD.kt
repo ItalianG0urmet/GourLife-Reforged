@@ -24,6 +24,16 @@ object LifeCMD {
         player.sendMessage("$prefix $message".toMini())
     }
 
+    @Subcommand("check <target>")
+    fun checkLife(player: Player, target: Player){
+        val targetLife: Int = jsonDataLoader.getPlayerLives(target)
+
+        var message = config.getString("check-life")
+        message = message?.replace("%life%", "$targetLife")
+        message = message?.replace("%player%", player.name)
+        player.sendMessage("$prefix $message".toMini())
+    }
+
     @Subcommand("set <target> <life>")
     fun giveLife(player: Player, target:Player, life: Int){
 
