@@ -20,13 +20,9 @@ class KillEvent : Listener {
         val player = event.entity
         val killer = player.killer ?: return
 
-        var lives: Int = jsonDataLoader.getPlayerLives(killer)
-        jsonDataLoader.setPlayerLives(killer, lives + 1)
+        val livesKiller: Int = jsonDataLoader.getPlayerLives(killer)
+        jsonDataLoader.setPlayerLives(killer, livesKiller + 1)
         killer.sendMessage("$prefix $gainedLifeMessage".toMini())
-
-        lives = jsonDataLoader.getPlayerLives(player)
-        jsonDataLoader.setPlayerLives(player, lives - 1)
-        player.sendMessage("$prefix $gainedLifeMessage".toMini())
 
         jsonDataLoader.savePlayerData()
     }
