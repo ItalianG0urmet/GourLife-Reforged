@@ -13,7 +13,7 @@ object LifeCMD {
 
     private val jsonDataLoader: JsonDataLoader = GourLife.jsonDataLoader
     private val config: FileConfiguration = GourLife.instance.config
-    private val prefix: String? = config.getString("prefix")
+    private val prefix: String = config.getString("prefix") ?: "[ErrorPrefix]"
 
     @Subcommand("check")
     fun checkLife(player: Player){

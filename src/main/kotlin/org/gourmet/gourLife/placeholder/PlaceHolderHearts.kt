@@ -3,18 +3,14 @@ package org.gourmet.gourLife.placeholder
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import org.gourmet.gourLife.GourLife
-import org.gourmet.gourLife.utils.Utils
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.gourmet.gourLife.utils.Utils.toMini
 
 class PlaceHolderHearts : PlaceholderExpansion() {
 
-    override fun canRegister(): Boolean {
-        return true
-    }
-
-    override fun persist(): Boolean {
-        return true
+    companion object{
+        private const val IDENTIFIER = "glife"
+        private const val AUTHOR = "gourmet"
+        private const val VERSION = "1.0.0"
     }
 
     override fun onRequest(player: OfflinePlayer?, params: String): String {
@@ -27,18 +23,18 @@ class PlaceHolderHearts : PlaceholderExpansion() {
             return "&c❤ $viteString".replace("&", "§")
         }
 
-        return "null"
+        return "error"
     }
 
     override fun getIdentifier(): String {
-        return "glife"
+        return IDENTIFIER
     }
 
     override fun getAuthor(): String {
-        return "gourmet"
+        return AUTHOR
     }
 
     override fun getVersion(): String {
-        return "1.0.0"
+        return VERSION
     }
 }

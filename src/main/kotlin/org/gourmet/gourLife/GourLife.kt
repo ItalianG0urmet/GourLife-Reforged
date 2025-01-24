@@ -13,44 +13,54 @@ import revxrsal.commands.bukkit.BukkitLamp
 
 class GourLife : JavaPlugin() {
 
-    companion object{
+    companion object {
         lateinit var instance: GourLife
+            private set
         lateinit var jsonDataLoader: JsonDataLoader
+            private set
     }
 
     override fun onEnable() {
         instance = this
         saveDefaultConfig()
-        jsonDataLoader = JsonDataLoader(this)
-        jsonDataLoader.loadPlayerData()
+        logger.info("GourLife starting...")
+
+        try {
+            jsonDataLoader = JsonDataLoader(this)
+            jsonDataLoader.loadPlayerData()
+        } catch (e: Exception) {
+            logger.severe("Error: ${e.message}")
+            Bukkit.getPluginManager().disablePlugin(this)
+            return
+        }
+
         placeHolderInit()
+        registerEvents()
 
-        Bukkit.getPluginManager().registerEvents(DeathEvent(), this)
-        Bukkit.getPluginManager().registerEvents(KillEvent(), this)
-        Bukkit.getPluginManager().registerEvents(LeaveEvent(), this)
-        Bukkit.getPluginManager().registerEvents(JoinEvent(), this)
+        BukkitLamp.builder(this).build().register(LifeCMD)
 
-        PlaceHolderHearts().register()
-
-        val handler = BukkitLamp.builder(this).build()
-        handler.register(
-            LifeCMD
-        )
+        logger.info("GourLife started!")
     }
 
     override fun onDisable() {
         saveDefaultConfig()
+        jsonDataLoader.savePlayerData()
+        logger.info("GourLife disabled")
     }
-
 
     private fun placeHolderInit() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            for (p in Bukkit.getOnlinePlayers()) {
-               if (p.hasPermission("glife.admin")) {
-                    p.sendMessage("PlaceHolderApi required")
-                }
-            }
-             Bukkit.getPluginManager().disablePlugin(this)
-       }
+            logger.severe("Missing PlaceHolderAPI")
+            Bukkit.getPluginManager().disablePlugin(this)
+            return
+        }
+        PlaceHolderHearts().register()
+    }
+
+    private fun registerEvents() {
+        val pluginManager = Bukkit.getPluginManager()
+        listOf(DeathEvent(), KillEvent(), LeaveEvent(), JoinEvent()).forEach { event ->
+            pluginManager.registerEvents(event, this)
+        }
     }
 }

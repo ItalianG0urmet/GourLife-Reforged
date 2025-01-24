@@ -15,7 +15,7 @@ class DeathEvent : Listener {
 
     private val jsonDataLoader: JsonDataLoader = GourLife.jsonDataLoader
     private val config: FileConfiguration = GourLife.instance.config
-    private val prefix: String? = config.getString("prefix")
+    private val prefix: String = config.getString("prefix") ?: "[ErrorPrefix]"
 
     @EventHandler
     fun playerDeathEvent(event: PlayerDeathEvent) {

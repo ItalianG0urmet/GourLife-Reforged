@@ -5,13 +5,11 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerQuitEvent
 import org.gourmet.gourLife.GourLife
-import org.gourmet.gourLife.jsonManager.JsonDataLoader
-import org.gourmet.gourLife.utils.Utils
 import org.gourmet.gourLife.utils.Utils.toMini
 
 class LeaveEvent : Listener {
     private val config: FileConfiguration = GourLife.instance.config
-    private val prefix: String? = config.getString("prefix")
+    private val prefix: String = config.getString("prefix") ?: "[ErrorPrefix]"
 
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
