@@ -60,7 +60,6 @@ help-commands: |
 **Placeholders:**
 
 - Life Placeholder: `%glife_life%`
-- Revelation Timer: `%glife_revelation%`
 
 **Permissions:**
 
