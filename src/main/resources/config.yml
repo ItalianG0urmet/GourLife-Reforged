@@ -5,7 +5,11 @@ death-message: true
 final-message: true
 life-number: 3
 execute-command: true
-console-command: "/ban %player%" #Test
+console-command: "ban %player%"
+
+#If this is enabled and the death player will rejoin the server, he will get again some life
+reset-life-rejoin: true
+reset-life-count: 1
 
 # Messages
 prefix: "<gray>[<white>ServerName<gray>]<dark_gray> » "

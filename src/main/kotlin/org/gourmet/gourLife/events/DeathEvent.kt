@@ -51,8 +51,6 @@ class DeathEvent : Listener {
             Utils.sendMessageAll("$prefix $message")
         }
 
-        player.gameMode = GameMode.SPECTATOR
-
         if (config.getBoolean("execute-command")) {
             var consoleCommand = config.getString("console-command")
             consoleCommand = consoleCommand!!.replace("%player%", player.name)

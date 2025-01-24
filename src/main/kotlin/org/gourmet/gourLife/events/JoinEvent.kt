@@ -16,15 +16,30 @@ class JoinEvent : Listener {
 
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
-        if (!config.getBoolean("Join-messages")) return
 
         val player: Player = event.player
         val playerName: String = event.player.name
 
-        var message: String = config.getString("join").toString()
-        message = message.replace("%player%", playerName)
-        event.joinMessage("$prefix $message".toMini())
+        rejoinDeathPlayer(player)
+
+
+        if (config.getBoolean("Join-messages")) {
+            var message: String = config.getString("join").toString()
+            message = message.replace("%player%", playerName)
+            event.joinMessage("$prefix $message".toMini())
+        }
 
         jsonDataLoader.addPlayer(player)
+    }
+
+    private fun rejoinDeathPlayer(player: Player){
+        if(jsonDataLoader.getPlayerLives(player) > 0) return
+        if(!config.getBoolean("reset-life-rejoin")) return
+
+
+        val rejoinLives: Int = config.getInt("reset-life-count")
+        jsonDataLoader.setPlayerLives(player, rejoinLives)
+        jsonDataLoader.savePlayerData()
+
     }
 }
