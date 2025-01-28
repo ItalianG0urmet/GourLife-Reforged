@@ -4,12 +4,18 @@ leave-messages: true
 death-message: true
 final-message: true
 life-number: 3
-execute-command: true
-console-command: "ban %player%"
+execute-command: false
+console-command: "tempban %player% 15d Eliminated"
 
 #If this is enabled and the death player will rejoin the server, he will get again some life
 reset-life-rejoin: true
 reset-life-count: 1
+
+#Discord
+webhook-title: "%player% eliminated"
+webhook-message: "This player is eliminated from the server"
+webhook-on-final: false
+webhook-color: 16711680 #Red
 
 # Messages
 prefix: "<gray>[<white>ServerName<gray>]<dark_gray> » "
@@ -22,9 +28,6 @@ give-life: "<aqua>You have donated 1 life"
 receive-life: "<aqua>You have received 1 life from %player%"
 cant-find-player: "<red>Player not found"
 cant-send-to-yourself: "<red>You can't do that to yourself"
-revelation_message: "%player% is at (%position_x%, %position_y%, %position_z%, %world%)"
-title_revelation: "<red>Revelation"
-subtitle_revelation: "<red>"
 death: "<yellow>%player% has died and now has <red>❤ %lifes% lives"
 final-death: "<yellow>%player% has died permanently"
 join: "<yellow>%player% has joined the server!"

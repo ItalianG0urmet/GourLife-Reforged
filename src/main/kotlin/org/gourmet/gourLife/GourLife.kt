@@ -34,6 +34,7 @@ class GourLife : JavaPlugin() {
             return
         }
 
+
         placeHolderInit()
         registerEvents()
 
