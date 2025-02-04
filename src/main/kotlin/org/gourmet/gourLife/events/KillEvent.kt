@@ -1,17 +1,16 @@
 package org.gourmet.gourLife.events
 
-import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.gourmet.gourLife.GourLife
-import org.gourmet.gourLife.jsonManager.JsonDataLoader
 import org.gourmet.gourLife.utils.Utils.toMini
 
 class KillEvent : Listener {
-    private val config: FileConfiguration = GourLife.instance.config
-    private val jsonDataLoader: JsonDataLoader = GourLife.jsonDataLoader
-    private val prefix: String = config.getString("prefix") ?: "[ErrorPrefix]"
+
+    private val config = GourLife.instance.config
+    private val jsonDataLoader = GourLife.jsonDataLoader
+    private val prefix = config.getString("prefix") ?: "[ErrorPrefix]"
     private val gainedLifeMessage = config.getString("gained-life")
 
     @EventHandler

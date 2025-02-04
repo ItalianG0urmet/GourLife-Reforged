@@ -38,7 +38,11 @@ class GourLife : JavaPlugin() {
         placeHolderInit()
         registerEvents()
 
-        BukkitLamp.builder(this).build().register(LifeCMD)
+
+        val handler = BukkitLamp.builder(this).build()
+        handler.register(
+            LifeCMD
+        )
 
         logger.info("GourLife started!")
     }
