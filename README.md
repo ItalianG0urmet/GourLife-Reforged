@@ -1,5 +1,5 @@
 
-# Glife Plugin ![](https://img.shields.io/badge/Platform-Linux-only-blue) ![Alpha](https://img.shields.io/badge/Status-Release-red)
+# Glife Plugin (OLD) ![](https://img.shields.io/badge/Platform-Linux-only-blue) ![Alpha](https://img.shields.io/badge/Status-Release-red)
 
 ![Banner](https://images-ext-2.discordapp.net/external/K_Vj-_8FzSL7B57Ycey0crHLgwftXVdKUHPVUceQ26c/https/i.postimg.cc/yxBjZCXB/Glifebanner-dsgvgd.jpg?format=webp&width=2560&height=1180)
 
