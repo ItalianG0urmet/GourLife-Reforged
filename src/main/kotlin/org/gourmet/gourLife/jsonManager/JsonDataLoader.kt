@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import org.bukkit.entity.Player
 import org.gourmet.gourLife.GourLife
+import org.gourmet.gourLife.utils.Logger
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
@@ -26,7 +27,7 @@ class JsonDataLoader(gourLife: GourLife) {
                     gson.toJson(JsonObject(), writer)
                 }
             } catch (e: IOException) {
-                e.printStackTrace()
+                Logger.warning("Json error: ${e.printStackTrace()}")
             }
         }
 
@@ -43,7 +44,7 @@ class JsonDataLoader(gourLife: GourLife) {
                 }
             }
         } catch (e: IOException) {
-            e.printStackTrace()
+            Logger.warning("Can't load players: ${e.printStackTrace()}")
         }
     }
 
@@ -58,7 +59,7 @@ class JsonDataLoader(gourLife: GourLife) {
                 gson.toJson(jsonObject, writer)
             }
         } catch (e: IOException) {
-            e.printStackTrace()
+            Logger.warning("Can't save players: ${e.printStackTrace()}")
         }
     }
 
