@@ -35,7 +35,10 @@ object LifeCMD {
     @Subcommand("set <target> <life>")
     fun giveLife(player: Player, target:Player, life: Int){
 
-        if (!player.hasPermission("glife.admin")) return
+        if (!player.hasPermission("glife.admin")){
+            player.sendMessage(configManager.NO_PERM.toMini())
+            return
+        }
 
         var message: String? = configManager.SET_LIFE
         message = message?.replace("%life%", "$life")
