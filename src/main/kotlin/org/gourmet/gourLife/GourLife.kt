@@ -9,6 +9,7 @@ import org.gourmet.gourLife.events.KillEvent
 import org.gourmet.gourLife.events.LeaveEvent
 import org.gourmet.gourLife.jsonManager.JsonDataLoader
 import org.gourmet.gourLife.placeholder.PlaceHolderHearts
+import org.gourmet.gourLife.utils.ConfigManager
 import org.gourmet.gourLife.utils.Logger
 import revxrsal.commands.bukkit.BukkitLamp
 
@@ -17,6 +18,7 @@ class GourLife : JavaPlugin() {
     companion object {
         lateinit var instance: GourLife private set
         lateinit var jsonDataLoader: JsonDataLoader private set
+        lateinit var configManager: ConfigManager private set
     }
 
     override fun onEnable() {
@@ -24,6 +26,7 @@ class GourLife : JavaPlugin() {
         saveDefaultConfig()
         Logger.info("GourLife starting...")
 
+        configManager = ConfigManager()
         initJsonData()
         placeHolderInit()
         registerEventsAndCommands()
