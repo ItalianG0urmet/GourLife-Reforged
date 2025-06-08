@@ -6,14 +6,15 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.gourmet.gourLife.GourLife
+import org.gourmet.gourLife.utils.Logger
 import org.gourmet.gourLife.utils.Utils
 import org.gourmet.gourLife.utils.WebHookUtils
 
 class DeathEvent : Listener {
 
     private val jsonDataLoader = GourLife.jsonDataLoader
-    private val config = GourLife.instance.config
-    private val prefix = config.getString("prefix") ?: "[ErrorPrefix]"
+    private val configManager = GourLife.configManager
+    private val prefix = configManager.PREFIX
 
     @EventHandler
     fun playerDeathEvent(event: PlayerDeathEvent) {
@@ -30,37 +31,46 @@ class DeathEvent : Listener {
     }
 
     private fun removeOneLife(player: Player, lives: Int){
+
+        //Json manager
         val newLivesCount = lives - 1
         jsonDataLoader.setPlayerLives(player, newLivesCount)
         jsonDataLoader.savePlayerData()
 
-        var deathMessage = config.getString("death")
-        deathMessage = deathMessage!!.replace("%player%", player.name)
+        //Message init
+        var deathMessage = configManager.DEATH
+        deathMessage = deathMessage.replace("%player%", player.name)
         deathMessage = deathMessage.replace("%lifes%", "" + newLivesCount)
-        if (config.getBoolean("death-message"))
+
+        if (configManager.deathMessage)
             Utils.sendMessageAll("$prefix $deathMessage")
 
     }
 
     private fun playerEliminated(player: Player) {
-        var eliminatedPlayerMessage = config.getString("final-death")
-        eliminatedPlayerMessage = eliminatedPlayerMessage!!.replace("%player%", player.name)
+
+        //Message init
+        var eliminatedPlayerMessage = configManager.FINAL_DEATH
+        eliminatedPlayerMessage = eliminatedPlayerMessage.replace("%player%", player.name)
+
+        //Webhook
         WebHookUtils.finalKillWebHook(player)
-        if (config.getBoolean("final-message")) {
+
+        if (configManager.finalMessage) {
             Utils.sendMessageAll("$prefix $eliminatedPlayerMessage")
         }
 
-        if (config.getBoolean("execute-command")) {
-            var consoleCommand = config.getString("console-command")
-            consoleCommand = consoleCommand!!.replace("%player%", player.name)
+        //Custom command on player final death
+        if (configManager.executeCommand) {
+            var consoleCommand = configManager.consoleCommand
+            consoleCommand = consoleCommand.replace("%player%", player.name)
 
-            GourLife.instance.logger.info("Error in final command: $consoleCommand")
+            Logger.warning("Error in final command: $consoleCommand")
 
             try {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), consoleCommand)
             } catch (e: Exception) {
-                GourLife.instance.logger.warning("Error in final command: $consoleCommand")
-                e.printStackTrace()
+                Logger.warning("Error in final command \"$consoleCommand\": ${e.printStackTrace()}")
             }
         }
 

@@ -9,14 +9,15 @@ import org.gourmet.gourLife.utils.Utils.toMini
 class LeaveEvent : Listener {
     private val config = GourLife.instance.config
     private val prefix = config.getString("prefix") ?: "[ErrorPrefix]"
+    private val configManager = GourLife.configManager
 
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
         if (config.getBoolean("leave-messages"))
             return
 
-        var message = config.getString("leave")
-        message = message!!.replace("%player%", event.player.name)
+        var message = configManager.leaveMessages.toString()
+        message = message.replace("%player%", event.player.name)
         event.quitMessage("$prefix $message".toMini())
     }
 }

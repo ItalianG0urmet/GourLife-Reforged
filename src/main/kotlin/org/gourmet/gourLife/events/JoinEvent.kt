@@ -10,7 +10,8 @@ import org.gourmet.gourLife.utils.Utils.toMini
 class JoinEvent : Listener {
     private val config = GourLife.instance.config
     private val jsonDataLoader = GourLife.jsonDataLoader
-    private val prefix = config.getString("prefix") ?: "ErrorPrefix"
+    private val configManager = GourLife.configManager
+    private val prefix = configManager.PREFIX
 
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
@@ -21,8 +22,8 @@ class JoinEvent : Listener {
         rejoinDeathPlayer(player)
 
 
-        if (config.getBoolean("Join-messages")) {
-            var message: String = config.getString("join").toString()
+        if (configManager.joinMessages) {
+            var message: String = configManager.JOIN.toString()
             message = message.replace("%player%", playerName)
             event.joinMessage("$prefix $message".toMini())
         }
@@ -32,10 +33,10 @@ class JoinEvent : Listener {
 
     private fun rejoinDeathPlayer(player: Player){
         if(jsonDataLoader.getPlayerLives(player) > 0) return
-        if(!config.getBoolean("reset-life-rejoin")) return
+        if(!configManager.resetLifeRejoin) return
 
 
-        val rejoinLives: Int = config.getInt("reset-life-count")
+        val rejoinLives: Int = configManager.resetLifeCount
         jsonDataLoader.setPlayerLives(player, rejoinLives)
         jsonDataLoader.savePlayerData()
 

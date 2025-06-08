@@ -12,22 +12,23 @@ object LifeCMD {
     private val jsonDataLoader = GourLife.jsonDataLoader
     private val config = GourLife.instance.config
     private val prefix = config.getString("prefix") ?: "[ErrorPrefix]"
+    private val configManager = GourLife.configManager
 
     @Subcommand("check")
     fun checkLife(player: Player){
         val playerLivesCount = jsonDataLoader.getPlayerLives(player)
-        var message = config.getString("your-life")
-        message = message?.replace("%life%", "$playerLivesCount")
+        var message = configManager.YOUR_LIFE
+        message = message.replace("%life%", "$playerLivesCount")
         player.sendMessage("$prefix $message".toMini())
     }
 
     @Subcommand("check <target>")
-    fun checkLife(player: Player, target: Player){
+    fun checkLifeWithTarget(player: Player, target: Player){
         val targetLife: Int = jsonDataLoader.getPlayerLives(target)
 
-        var message = config.getString("check-life")
-        message = message?.replace("%life%", "$targetLife")
-        message = message?.replace("%player%", player.name)
+        var message = configManager.CHECK_LIFE
+        message = message.replace("%life%", "$targetLife")
+        message = message.replace("%player%", player.name)
         player.sendMessage("$prefix $message".toMini())
     }
 
@@ -36,7 +37,7 @@ object LifeCMD {
 
         if (!player.hasPermission("glife.admin")) return
 
-        var message = config.getString("set-life")
+        var message: String? = configManager.SET_LIFE
         message = message?.replace("%life%", "$life")
         player.sendMessage("$prefix $message".toMini())
 

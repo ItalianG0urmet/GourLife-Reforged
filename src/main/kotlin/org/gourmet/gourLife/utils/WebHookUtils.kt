@@ -12,21 +12,23 @@ import org.json.JSONObject
 object WebHookUtils {
 
     private val config: FileConfiguration = GourLife.instance.config
+    private val configManager: ConfigManager = GourLife.configManager
 
     fun finalKillWebHook(player: Player) {
-        if(!config.getBoolean("webhook-on-final")) return
+        if(!configManager.webhookOnFinal) return
 
         val webHook: String = config.getString("webhook") ?: "null"
-        val color: Int = config.getInt("webhook-color") ?: 16711680
-        val title: String = config.getString("webhook-title").toString()
+        val color: Int = configManager.webhookColor ?: 16711680
+        val title: String = configManager.webhookTitle
             .replace("%player%", player.name)
-        val message: String = config.getString("webhook-message").toString()
+        val message: String = configManager.webhookMessage
             .replace("%player%", player.name)
 
         if(webHook == "null"){
             GourLife.instance.logger.warning("Invalid WebHook")
             return
         }
+
         val client = OkHttpClient()
 
         val json = JSONObject()
@@ -46,6 +48,7 @@ object WebHookUtils {
             .post(body)
             .build()
 
+        //Execute
         client.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {
                 throw Exception("Error in webhook: ${response.code}")

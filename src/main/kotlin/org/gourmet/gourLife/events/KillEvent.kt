@@ -8,10 +8,9 @@ import org.gourmet.gourLife.utils.Utils.toMini
 
 class KillEvent : Listener {
 
-    private val config = GourLife.instance.config
     private val jsonDataLoader = GourLife.jsonDataLoader
-    private val prefix = config.getString("prefix") ?: "[ErrorPrefix]"
-    private val gainedLifeMessage = config.getString("gained-life")
+    private val prefix = GourLife.configManager.PREFIX
+    private val gainedLifeMessage = GourLife.configManager.GAINED_LIFE
 
     @EventHandler
     fun onkill(event: PlayerDeathEvent) {

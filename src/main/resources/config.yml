@@ -12,6 +12,7 @@ reset-life-rejoin: true
 reset-life-count: 1
 
 #Discord
+webhook: ""
 webhook-title: "%player% eliminated"
 webhook-message: "This player is eliminated from the server"
 webhook-on-final: false
