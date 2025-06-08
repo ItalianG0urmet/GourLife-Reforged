@@ -19,12 +19,14 @@ repositories {
 
 
 dependencies {
+    implementation(kotlin("stdlib"))
     paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("org.json:json:20231013")
     implementation("io.github.revxrsal:lamp.common:4.0.0-rc.12")
     implementation("io.github.revxrsal:lamp.bukkit:4.0.0-rc.12")
+    implementation("io.github.revxrsal:lamp.brigadier:4.0.0-rc.12")
 }
 
 val targetJavaVersion = 21
@@ -43,7 +45,7 @@ tasks.build {
 
 tasks {
     shadowJar {
-        minimize()
+        archiveClassifier.set("")
     }
     build {
         dependsOn(shadowJar)
