@@ -1,9 +1,9 @@
 plugins {
     kotlin("jvm") version "2.1.20-Beta1"
-    id("io.papermc.paperweight.userdev") version "1.7.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.15"
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
     id("com.gradleup.shadow") version "8.3.4"
-    id("xyz.jpenilla.run-paper") version "2.3.0"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "com.gourmet"
@@ -19,13 +19,12 @@ repositories {
 
 
 dependencies {
-    paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("org.json:json:20210307")
-    implementation("io.github.revxrsal:lamp.common:4.0.0-beta.19")
-    implementation("io.github.revxrsal:lamp.bukkit:4.0.0-beta.19")
-    implementation("io.github.revxrsal:lamp.brigadier:4.0.0-beta.19")
+    implementation("org.json:json:20231013")
+    implementation("io.github.revxrsal:lamp.common:4.0.0-rc.12")
+    implementation("io.github.revxrsal:lamp.bukkit:4.0.0-rc.12")
 }
 
 val targetJavaVersion = 21
