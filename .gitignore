@@ -7,7 +7,6 @@ Thumbs.db
 .gradle/
 .idea/
 .kotlin/
-/gradle/
 /run/
 out/
 
